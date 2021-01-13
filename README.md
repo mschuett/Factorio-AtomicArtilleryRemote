@@ -15,6 +15,11 @@ This mod supports exactly this situation:
 When the remote is used the mod checks all artillery turrets in range.
 If any turret in range has Atomic Artillery Shells, then all the other turrets are disabled for a short time, so that only the "right" turret may fire.
 
+## Issues
+
+It works reasonably well with turrets, but I could not get it to work with Artillery Wagons:
+The mod does find the wagon, and it disables it, and then the wagon shoots anyway.
+
 ## Comments on the Lua code
 
 Be careful, this is my first attempt writing Lua.

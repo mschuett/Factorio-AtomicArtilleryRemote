@@ -33,7 +33,7 @@ function aar_get_turrets_in_range(player, position)
     --     artillery_range))
 
     local all_turrets = player.surface.find_entities_filtered{
-        name = "artillery-turret",
+        name = ["artillery-turret",  "artillery-wagon"],
         force = "player",
         position = position,
         radius = artillery_range
@@ -45,7 +45,7 @@ function aar_get_turrets_in_range(player, position)
     end
     
     -- else: check for turrets with atomic shells
-    aar_log(string.format("found %d artillery turrets in current range %.2f",
+    aar_log(string.format("found %d artilleries in current range %.2f",
         #all_turrets, artillery_range))
 
     local atomic_turrets = {}
@@ -60,8 +60,8 @@ function aar_get_turrets_in_range(player, position)
             t_atomic = turret.get_item_count("atomic-artillery-shell")
         end
         
-        local t_entity_string = string.format("unit: %8d @ %5.1f, %5.1f (dist %6.1f): ",
-            turret.unit_number, turret.position.x, turret.position.y, dist)
+        local t_entity_string = string.format("%16s (%8d) @ (%5.1f, %5.1f) dist %6.1f: ",
+            turret.name, turret.unit_number, turret.position.x, turret.position.y, dist)
         local t_status_string = string.format("active %s, stat %d, %d shells, %d atomic shells",
             turret.active, turret.status, t_shell, t_atomic)
 
@@ -216,7 +216,7 @@ function aar_show_global_events()
         return "not initialized"
     end
 
-    -- we store LuaEntity refs for turrets, so serpend will not work for userdata
+    -- we store LuaEntity refs for turrets, so serpent will not work for userdata
 
     local event_list = {}
     for event_number, turretlist in pairs(global.events) do
