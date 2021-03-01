@@ -3,32 +3,53 @@
 Attempt to create a Quality of Life enhancement for 
 [Atomic Artillery](https://github.com/sirdoombox/AtomicArtillery)
 
-It does not add any new items or recipes, it only changes the
-behaviour of the Artillery Remote in combination with Atomic Artillery Shells.
+This is a second version that creates a custom ammunition type for Atomic Artillery shells,
+which requires its own turret and its own targeting remote.
 
 ## What it does
 
 When I have expensive Atomic Artillery Shells and use the remote, then I want to shoot the Atomic Artillery Shells.
 I do not want some random artillery turret to shoot a simple shell into that large biter base.
+On the other hand I do not want Atomic Artillery Shells to fire to kill the single stray worm.
 
 This mod supports exactly this situation:
-When the remote is used the mod checks all artillery turrets in range.
-If any turret in range has Atomic Artillery Shells, then all the other turrets are disabled for a short time, so that only the "right" turret may fire.
+it defines a new set of items and a new ammunition type for the Atomic Artillery.
+This gives you more control over the artillery, with two targeting remotes you can
+place different target markers for "normal" Artillery and Atomic Artillery
+(except for some bugs and edge cases, see below).
 
-## Issues
+Unfortunately this also requires separate Turret building for the different kinds of
+Artillery. It is no longer possible to interchange Artillery shells and
+Atomic Artillery shells in the same Turret.
 
-It works reasonably well with turrets, but I could not get it to work with Artillery Wagons:
-The mod does find the wagon, and it disables it, and then the wagon shoots anyway.
+## Issues/Limitations
 
-## Comments on the Lua code
+### Missing Migration
 
-Be careful, this is my first attempt writing Lua.
-So please save often, save early, and expect some bugs.
+I still have to test all kinds of compatibility issues and migrations.
 
-At first I tried to define an additional `ammo-type` and a special kind of remote.
-That did not work, but that is the reason it is still called "Atomic Artillery Remote" and all my functions use the name prefix `aar_`.
+### Wagons
 
-I had some problems with numeric table indices (e.g. `global.events[5]`).
-Lua's table insert/remove operations would treat the table as an array and shift the elements around.
-In order to treat the tables as hashmaps I convert the indices to strings (e.g. `global.events["5"]`).
-I would love to learn a better solution.
+So far there are only Atomic Artillery Turrets, no modified Artillery wagons.
+
+### Unreliable
+
+If no "plain" Artillery with ammo is in range, then the Atomic Artillery will
+still fire on targets placed with the "Artillery targeting remote".
+
+To my knowledge this should not be possible due to the different flare types,
+selecting different ammo types, but there seems to be a precedence or fall-back mechanism(?)
+Any help or advice with this would be appreciated.
+
+### Targeting Radius in map mode
+
+If an Atomic Artillery is in range, then the plain "Artillery targeting remote"
+still shows the larger target radius (in map mode). 
+
+### Graphics
+
+This mod could use some graphics.
+So far I created very simple item icons for the remote and a turret with a green dot,
+in order to distinguish the atomic items in the inventory.
+But there is no entity graphic for the placed turret, so the Artillery turrets
+look the same and only a mouse-over will show the different entity names.
