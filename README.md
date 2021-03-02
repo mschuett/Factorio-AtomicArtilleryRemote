@@ -24,13 +24,12 @@ Atomic Artillery shells in the same Turret.
 
 ## Issues/Limitations
 
-### Missing Migration
+### Migrations
 
-I still have to test all kinds of compatibility issues and migrations.
+When you add this mod to an existing save game will disable all Artillery turrets and wagons
+with Atomic artillery shells (because the ammo type no longer matches).
 
-### Wagons
-
-So far there are only Atomic Artillery Turrets, no modified Artillery wagons.
+When you remove this mod all its entities are removed from the game.
 
 ### Unreliable
 
