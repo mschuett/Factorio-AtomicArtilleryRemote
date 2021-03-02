@@ -1,5 +1,5 @@
 -- data.lua
--- 
+--
 -- decided to put everything into one file so we can use local variables
 -- could be split up later...
 
