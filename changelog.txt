@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.2.1
+Date: 2020-03-02
+
+  Changes:
+    - Add Atomic artillery wagons
+  Bugfixes:
+    - items are no longer enabled on load, but depend on technology ("atomic-bomb")
+---------------------------------------------------------------------------------------------------
 Version: 0.2.0
 Date: 2020-03-01
 
