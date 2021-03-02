@@ -16,5 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     # TODO: condition to only run on main branch
     steps:
+      - uses: actions/checkout@v2
       - name: Create Factorio mod package
         uses: Roang-zero1/factorio-mod-package@master
