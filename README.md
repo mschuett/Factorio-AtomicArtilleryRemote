@@ -31,15 +31,6 @@ with Atomic artillery shells (because the ammo type no longer matches).
 
 When you remove this mod all its entities are removed from the game.
 
-### Unreliable
-
-If no "plain" Artillery with ammo is in range, then the Atomic Artillery will
-still fire on targets placed with the "Artillery targeting remote".
-
-To my knowledge this should not be possible due to the different flare types,
-selecting different ammo types, but there seems to be a precedence or fall-back mechanism(?)
-Any help or advice with this would be appreciated.
-
 ### Targeting Radius in map mode
 
 If an Atomic Artillery is in range, then the plain "Artillery targeting remote"
