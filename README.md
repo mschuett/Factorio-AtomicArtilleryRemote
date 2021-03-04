@@ -31,11 +31,6 @@ with Atomic artillery shells (because the ammo type no longer matches).
 
 When you remove this mod all its entities are removed from the game.
 
-### Targeting Radius in map mode
-
-If an Atomic Artillery is in range, then the plain "Artillery targeting remote"
-still shows the larger target radius (in map mode). 
-
 ### Graphics
 
 This mod could use some graphics.
