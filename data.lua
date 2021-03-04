@@ -99,6 +99,13 @@ atomicFlare.pictures = {{
 atomicFlare.shot_category = ammo_type_name
 data:extend({atomicFlare})
 
+-- explicitly set shot_category for the "old" artillery flare,
+-- cf. https://forums.factorio.com/viewtopic.php?p=494646
+local artillery_flare = data.raw["artillery-flare"]["artillery-flare"]
+if artillery_flare then
+  artillery_flare.shot_category = "artillery-shell"
+end
+
 -- new remote item
 local atomicRemoteItem = table.deepcopy(data.raw["capsule"]["artillery-targeting-remote"])
 atomicRemoteItem.name = remote_item_name
