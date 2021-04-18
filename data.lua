@@ -6,6 +6,8 @@
 local turret_name = "atomic-artillery-turret"
 local wagon_name = "atomic-artillery-wagon"
 local remote_item_name = "atomic-artillery-targeting-remote"
+local tech_name = "atomic-artillery"
+local tech_icon_path = "__AtomicArtilleryRemote__/graphics/icons/".. tech_name ..".png"
 local remote_icon_path = "__AtomicArtilleryRemote__/graphics/icons/".. remote_item_name ..".png"
 local turret_icon_path = "__AtomicArtilleryRemote__/graphics/icons/".. turret_name ..".png"
 local wagon_icon_path = "__AtomicArtilleryRemote__/graphics/icons/".. wagon_name ..".png"
@@ -31,6 +33,9 @@ local atomicGun = table.deepcopy(data.raw["gun"]["artillery-wagon-cannon"])
 atomicGun.name = gun_name
 local atomicGun_params = table.deepcopy(atomicGun.attack_parameters)
 atomicGun_params.ammo_category = ammo_type_name
+-- experimental: try to lower range, and raise manual_range_modifier in turret
+-- target: effectively disable "automatic mode"
+-- atomicGun_params.range = 1 * 32
 atomicGun.attack_parameters = atomicGun_params
 data:extend({atomicGun})
 
@@ -48,6 +53,9 @@ local atomicTurret = table.deepcopy(data.raw["artillery-turret"]["artillery-turr
 atomicTurret.name = turret_name
 atomicTurret.minable.result = turret_name
 atomicTurret.gun = gun_name
+atomicTurret.turret_rotation_speed = atomicTurret.turret_rotation_speed / 2
+atomicTurret.ammo_stack_limit = atomicTurret.ammo_stack_limit / 2
+-- atomicTurret.manual_range_modifier = 17.5 -- 2.5 * 7 to get original range
 data:extend({atomicTurret})
 
 -- new artillery turret - recipe
@@ -72,6 +80,9 @@ atomicWagon.name = wagon_name
 atomicWagon.icon = wagon_icon_path
 atomicWagon.minable.result = wagon_name
 atomicWagon.gun = gun_name
+atomicWagon.turret_rotation_speed = atomicWagon.turret_rotation_speed / 2
+atomicWagon.ammo_stack_limit = atomicWagon.ammo_stack_limit / 2
+-- atomicWagon.manual_range_modifier = 17.5 -- 2.5 * 7 to get original range
 data:extend({atomicWagon})
 
 -- new artillery wagon - recipe
@@ -126,7 +137,52 @@ atomicRemoteRecipe.result = remote_item_name
 atomicRemoteRecipe.ingredients = {{"artillery-targeting-remote",1},{"repair-pack",1}}
 data:extend({atomicRemoteRecipe})
 
--- technology requirements
-table.insert(data.raw["technology"]["atomic-bomb"].effects,{type="unlock-recipe",recipe=remote_item_name})
-table.insert(data.raw["technology"]["atomic-bomb"].effects,{type="unlock-recipe",recipe=turret_name})
-table.insert(data.raw["technology"]["atomic-bomb"].effects,{type="unlock-recipe",recipe=wagon_name})
+-- technology
+local atomicTech = {
+    type = "technology",
+    name = tech_name,
+    icon_size = 256, icon_mipmaps = 4,
+    icon = tech_icon_path,
+    effects =
+    {
+      {
+        type = "unlock-recipe",
+        recipe = remote_item_name
+      },
+      {
+        type = "unlock-recipe",
+        recipe = turret_name
+      },
+      {
+        type = "unlock-recipe",
+        recipe = wagon_name
+      }
+    },
+    prerequisites = {"atomic-bomb", "artillery"},
+    unit =
+    {
+      ingredients =
+      {
+        {"automation-science-pack", 1},
+        {"logistic-science-pack", 1},
+        {"chemical-science-pack", 1},
+        {"military-science-pack", 1},
+        {"utility-science-pack", 1}
+      },
+      time = 30,
+      count = 4000
+    },
+    order = "d-e-f"
+  }
+data:extend({atomicTech})
+
+-- note: here we change the recipe from the "Atomic Artillery" mod,
+--       to move the "atomic-artillery-shell" into our tech
+table.insert(data.raw["technology"][tech_name].effects,{type="unlock-recipe",recipe="atomic-artillery-shell"})
+for i = 1, #data.raw.technology["atomic-bomb"].effects do
+    effect = data.raw.technology["atomic-bomb"].effects[i]
+    if effect.type == "unlock-recipe" and effect.recipe == "atomic-artillery-shell" then
+        index = i
+    end
+end
+table.remove(data.raw.technology["atomic-bomb"].effects, index)

@@ -21,8 +21,11 @@ Unfortunately this also requires separate Turret building for the different kind
 Artillery. It is no longer possible to interchange Artillery shells and
 Atomic Artillery shells in the same Turret.
 
-I did not try to change any balancing, just like in [Atomic Artillery](https://github.com/sirdoombox/AtomicArtillery)
-the entities have the same cost as in the base game, so only the ammunition is expensive.
+I did not try to change much of the balancing. All recipes require a new late-game
+technology and the atomic artillery shells are quite expensive (the shell recipe is
+copied from [Atomic Artillery](https://github.com/sirdoombox/AtomicArtillery));
+the turrets and wagons are only small modifications of the original
+artillery turrets and wagons.
 
 ## Limitations
 
