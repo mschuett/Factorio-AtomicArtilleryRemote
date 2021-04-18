@@ -179,8 +179,9 @@ data:extend({atomicTech})
 -- note: here we change the recipe from the "Atomic Artillery" mod,
 --       to move the "atomic-artillery-shell" into our tech
 table.insert(data.raw["technology"][tech_name].effects,{type="unlock-recipe",recipe="atomic-artillery-shell"})
+local index
 for i = 1, #data.raw.technology["atomic-bomb"].effects do
-    effect = data.raw.technology["atomic-bomb"].effects[i]
+    local effect = data.raw.technology["atomic-bomb"].effects[i]
     if effect.type == "unlock-recipe" and effect.recipe == "atomic-artillery-shell" then
         index = i
     end
