@@ -1,7 +1,13 @@
 # Atomic Artillery Remote
 
-This is an enhancement for [Atomic Artillery](https://github.com/sirdoombox/AtomicArtillery).
+This is an enhancement for [Atomic Artillery](https://github.com/sirdoombox/AtomicArtillery) mod **for Factorio 1.0**.
 It creates a custom ammunition type for Atomic Artillery shells, which requires its own turret and its own targeting remote.
+
+[This mod on mods.factorio.com](https://mods.factorio.com/mod/AtomicArtilleryRemote)
+
+> [!NOTE]
+> This mod is "finished". It works with the last Factorio 1.1 version and has no bugs I am aware of. -- 
+> But I do not intend any further development and I will not port it for Factorio 2.0.
 
 ## Why
 
